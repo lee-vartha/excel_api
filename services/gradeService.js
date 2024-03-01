@@ -12,7 +12,16 @@ const calculateGrades = () => {
     const studentScores = data.map(student => {
         let studentScore = 0
         for (let i = 0; i <= 9; i++) {
-            studentScore += student[`Question ${i + 1}`]
+            studentScore += student[`Question ${i + 1}`] || 0;
         }
+        totalScore += studentScore;
+        return { studentName: student['Student Name'], score: studentScore };
     })
+
+    const averageScore = totalScore /data.length
+    return { averageScore, studentScores }
+}
+
+module.exports = {
+    calculateGrades
 }
